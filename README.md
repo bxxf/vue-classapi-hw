@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # vue-ukol
 =======
 # test
@@ -31,3 +32,6 @@ yarn lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 >>>>>>> init
+=======
+# vue-ukol
+>>>>>>> Configured project structure
