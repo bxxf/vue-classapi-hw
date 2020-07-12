@@ -1,5 +1,6 @@
 {
   "editor.renderWhitespace": "none",
+  "files.eol": "\n",
   "prettier.endOfLine": "lf",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {

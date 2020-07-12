@@ -32,4 +32,5 @@ module.exports = {
       importPrefix: '@/pages/',
     },
   },
+  transpileDependencies: ['vuetify'],
 };
