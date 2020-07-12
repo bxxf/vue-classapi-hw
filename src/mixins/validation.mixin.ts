@@ -1,8 +1,15 @@
 import Vue from 'vue';
+import { namespace } from 'vuex-class';
 import { Mixin } from 'vue-mixin-decorator';
 
+import IValues from '@/interfaces/values.interface';
+const responseStore = namespace('responses');
 @Mixin
 export default class ValidationMixin extends Vue {
+  @responseStore.Getter
+  data!: IValues[];
+
+  valid = true;
   rules = {
     name: [(v: string) => !!v || 'Name is required'],
     email: [
@@ -14,10 +21,12 @@ export default class ValidationMixin extends Vue {
   };
 
   errors = {
-    code: undefined,
+    code: undefined as string | undefined,
   };
 
-  validateCode(): boolean {
-    return true;
+  validateCode(code: string): boolean {
+    const exists = this.data.some((response) => response.code === code);
+    if (exists) this.errors.code = 'This code is already used';
+    return !exists;
   }
 }

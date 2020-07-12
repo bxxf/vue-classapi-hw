@@ -3,11 +3,11 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-import counter from './modules/counter';
+import responses from './modules/responses';
 
 const store = new Vuex.Store({
   modules: {
-    counter,
+    responses,
   },
 });
 

@@ -16,6 +16,7 @@ body {
   margin: 0px;
   padding: 0px;
   overflow-x: hidden;
+  overflow-y: auto !important;
 }
 *,
 *:before,

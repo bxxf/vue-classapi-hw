@@ -1,19 +1,24 @@
 <template>
   <div id="main-form">
-    <v-form ref="form">
+    <v-form ref="form" v-model="valid">
       <v-text-field
         v-model="values.name"
+        color="success"
         :rules="rules.name"
         label="Name"
       ></v-text-field>
       <v-text-field
         v-model="values.email"
+        color="success"
         :rules="rules.email"
         label="Email"
       ></v-text-field>
       <v-text-field
         v-model="values.code"
+        color="success"
         :rules="rules.code"
+        @keydown="errors.code = ''"
+        :error-messages="errors.code"
         label="Code"
       ></v-text-field>
       <v-checkbox
@@ -21,9 +26,11 @@
         color="success"
         :ripple="false"
         :rules="rules.agreement"
-        label="Do you agree?"
-      ></v-checkbox>
-      <v-btn color="success" @click="submit" class="mt-4">
+        ><span slot="label"
+          >I agree with the <a>processing of personal data</a>.</span
+        ></v-checkbox
+      >
+      <v-btn color="success" @click="submit" class="mt-4" :disabled="!valid">
         Submit
       </v-btn>
     </v-form>
@@ -50,14 +57,19 @@ export default class MainForm extends Mixins<ValidationMixin>(ValidationMixin) {
   };
   submit() {
     if (!(this.$refs.form as VForm).validate()) return;
-    if (!this.validateCode()) return;
+    if (!this.validateCode(this.values.code)) return;
     this.$emit('submitted', this.values);
   }
 }
 </script>
 
-<style>
+<style scoped>
 #main-form {
-  width: 300px;
+  width: 350px;
+}
+@media only screen and (max-width: 400px) {
+  #main-form {
+    width: 100%;
+  }
 }
 </style>
