@@ -1,6 +1,9 @@
 <template>
   <v-app id="app">
-    <div id="nav"></div>
+    <div id="nav">
+      <router-link to="/">Form</router-link>
+      <router-link to="/data">Data</router-link>
+    </div>
     <router-view />
   </v-app>
 </template>
@@ -24,5 +27,19 @@ body {
   font-family: Lato, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+#nav {
+  margin: 0 auto;
+  padding: 30px;
+  a {
+    padding: 0 10px;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+    &.router-link-exact-active {
+      color: #4caf50;
+    }
+  }
 }
 </style>

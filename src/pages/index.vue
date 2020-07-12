@@ -1,15 +1,29 @@
 <template>
-  <div><hello-world /></div>
+  <v-layout column justify-center align-center>
+    <div>
+      <h1>Form</h1>
+      <main-form @submitted="save" />
+    </div>
+  </v-layout>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from 'vue';
+import MainForm from '@/components/main-form.vue';
 import Component from 'vue-class-component';
-import HelloWorld from '@/components/HelloWorld.vue';
+
+import IValues from '@/interfaces/values.interface';
 
 @Component({
   name: 'Index',
-  components: { HelloWorld },
+  components: {
+    MainForm,
+  },
 })
-export default class extends Vue {}
+export default class extends Vue {
+  save(values: IValues): void {
+    console.log('sumbitted', values);
+    return;
+  }
+}
 </script>
