@@ -4,7 +4,7 @@
       <h1>Form</h1>
       <main-form @submitted="save" />
     </div>
-    <v-snackbar v-model="snackbar" :timeout="10000">
+    <v-snackbar v-model="snackbar" :timeout="10000" top color="success">
       {{ email }} has already sent {{ count }}
       {{ count === 1 ? 'code' : 'codes' }}.
     </v-snackbar>
