@@ -13,9 +13,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import MainForm from '@/components/main-form.vue';
 import Component from 'vue-class-component';
 import { namespace } from 'vuex-class';
+
+import MainForm from '@/components/main-form.vue';
 
 import Response from '@/interfaces/response.interface';
 import { countResponses } from '@/services/response.service';

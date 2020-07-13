@@ -1,6 +1,6 @@
 <template>
   <div id="main-form">
-    <v-form ref="form" v-model="valid">
+    <v-form ref="form" v-model="valid" @submit.prevent="submit">
       <v-text-field
         v-model="values.name"
         color="success"
@@ -11,6 +11,7 @@
         v-model="values.email"
         color="success"
         :rules="rules.email"
+        type="email"
         label="Email"
       ></v-text-field>
       <v-text-field
