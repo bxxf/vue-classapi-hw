@@ -1,34 +1,35 @@
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators';
-import IValues from '@/interfaces/values.interface';
+import Response from '@/interfaces/response.interface';
 @Module({ namespaced: true })
 export default class ResponsesModule extends VuexModule {
-  responses: IValues[] = [];
+  responses: Response[] = [];
 
   get data() {
     return this.responses;
   }
 
   @Mutation
-  setResponses(responses: IValues[]) {
+  setResponses(responses: Response[]) {
     if (!responses) return;
     this.responses = responses;
   }
 
   @Mutation
-  addResponse(values: IValues): void {
+  addResponse(values: Response) {
     this.responses.push(values);
   }
 
   @Action({ rawError: true, commit: 'addResponse' })
-  saveResponse(response: IValues) {
-    const responses: IValues[] = this.responses.concat(response);
+  saveResponse(response: Response): Response {
+    const responses: Response[] = this.responses.concat(response);
     localStorage.setItem('responses', JSON.stringify(responses));
     return response;
   }
 
-  @Action({ rawError: true, commit: 'setReponses' })
-  fetchResponses() {
-    const responses: IValues[] = localStorage.getItem('responses')?.length
+  @Action({ rawError: true, commit: 'setResponses' })
+  fetchResponses(): Response[] | null {
+    if (this.responses.length) return null;
+    const responses: Response[] = localStorage.getItem('responses')?.length
       ? JSON.parse(localStorage.getItem('responses')!)
       : null;
     return responses;

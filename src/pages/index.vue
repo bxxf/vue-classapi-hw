@@ -4,9 +4,9 @@
       <h1>Form</h1>
       <main-form @submitted="save" />
     </div>
-    <v-snackbar v-model="snackbar.show" :timeout="10000">
-      This user has already sent {{ snackbar.count }}
-      {{ snackbar.count === 1 ? 'code' : 'codes' }}.
+    <v-snackbar v-model="snackbar" :timeout="10000">
+      {{ email }} has already sent {{ count }}
+      {{ count === 1 ? 'code' : 'codes' }}.
     </v-snackbar>
   </v-layout>
 </template>
@@ -33,17 +33,17 @@ export default class extends Vue {
   @responseStore.Getter
   data!: Response[];
 
-  snackbar = {
-    show: false,
-    count: 0,
-  };
+  email = '';
+  snackbar = false;
+
+  get count() {
+    return countResponses(this.email, this.data);
+  }
 
   save(values: Response) {
     this.saveResponse(values);
-    this.snackbar = {
-      show: true,
-      count: countResponses(values.email, this.data),
-    };
+    this.email = values.email;
+    this.snackbar = true;
   }
 }
 </script>

@@ -8,6 +8,22 @@
   </v-app>
 </template>
 
+<script lang="ts">
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import { namespace } from 'vuex-class';
+
+const responseStore = namespace('responses');
+
+@Component
+export default class extends Vue {
+  @responseStore.Action fetchResponses!: () => void;
+  created() {
+    this.fetchResponses();
+  }
+}
+</script>
+
 <style lang="scss">
 html,
 body {
