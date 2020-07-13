@@ -10,10 +10,10 @@
           <th>Agreement</th>
         </tr>
         <tr v-for="(response, index) in data" :key="index">
-          <td>{{ response.name }}</td>
-          <td>{{ response.email }}</td>
-          <td>{{ response.code }}</td>
-          <td>{{ response.agreement }}</td>
+          <td>{{ response.name || 'unspecified' }}</td>
+          <td>{{ response.email || 'unspecified' }}</td>
+          <td>{{ response.code || 'unspecified' }}</td>
+          <td>{{ response.agreement || 'unspecified' }}</td>
         </tr>
       </table>
 

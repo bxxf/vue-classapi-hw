@@ -56,9 +56,11 @@ export default class MainForm extends Mixins<ValidationMixin>(ValidationMixin) {
     code: '',
     agreement: false,
   };
+
   submit() {
     if (!(this.$refs.form as VForm).validate()) return;
     if (!this.validateCode(this.values.code)) return;
+
     this.$emit('submitted', { ...this.values });
     (this.$refs.form as VForm).reset();
   }
