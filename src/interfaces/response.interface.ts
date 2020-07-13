@@ -1,4 +1,4 @@
-export default interface IValues {
+export default interface IResponse {
   name: string;
   email: string;
   code: string;

@@ -42,8 +42,8 @@ import Vue from 'vue';
 import { Component, Mixins } from 'vue-mixin-decorator';
 
 import ValidationMixin from '@/mixins/validation.mixin';
-import IValues from '@/interfaces/values.interface.ts';
-type VForm = Vue & { validate: () => boolean };
+import IValues from '@/interfaces/response.interface';
+type VForm = Vue & { validate: () => boolean } & { reset: () => void };
 
 @Component({
   name: 'MainForm',
@@ -58,7 +58,8 @@ export default class MainForm extends Mixins<ValidationMixin>(ValidationMixin) {
   submit() {
     if (!(this.$refs.form as VForm).validate()) return;
     if (!this.validateCode(this.values.code)) return;
-    this.$emit('submitted', this.values);
+    this.$emit('submitted', { ...this.values });
+    (this.$refs.form as VForm).reset();
   }
 }
 </script>

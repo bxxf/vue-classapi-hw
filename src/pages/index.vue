@@ -4,6 +4,10 @@
       <h1>Form</h1>
       <main-form @submitted="save" />
     </div>
+    <v-snackbar v-model="snackbar.show" :timeout="10000">
+      This user has already sent {{ snackbar.count }}
+      {{ snackbar.count === 1 ? 'code' : 'codes' }}.
+    </v-snackbar>
   </v-layout>
 </template>
 
@@ -11,9 +15,10 @@
 import Vue from 'vue';
 import MainForm from '@/components/main-form.vue';
 import Component from 'vue-class-component';
-
 import { namespace } from 'vuex-class';
-import IValues from '@/interfaces/values.interface';
+
+import Response from '@/interfaces/response.interface';
+import { countResponses } from '@/services/response.service';
 
 const responseStore = namespace('responses');
 
@@ -24,11 +29,21 @@ const responseStore = namespace('responses');
   },
 })
 export default class extends Vue {
-  @responseStore.Action saveResponse!: (response: IValues) => void;
+  @responseStore.Action saveResponse!: (response: Response) => void;
+  @responseStore.Getter
+  data!: Response[];
 
-  save(values: IValues): void {
+  snackbar = {
+    show: false,
+    count: 0,
+  };
+
+  save(values: Response) {
     this.saveResponse(values);
-    return;
+    this.snackbar = {
+      show: true,
+      count: countResponses(values.email, this.data),
+    };
   }
 }
 </script>

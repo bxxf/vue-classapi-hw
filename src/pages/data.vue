@@ -27,7 +27,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { namespace } from 'vuex-class';
 
-import IValues from '@/interfaces/values.interface';
+import IValues from '@/interfaces/response.interface';
 const responseStore = namespace('responses');
 
 @Component({

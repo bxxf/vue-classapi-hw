@@ -2,7 +2,7 @@ import Vue from 'vue';
 import { namespace } from 'vuex-class';
 import { Mixin } from 'vue-mixin-decorator';
 
-import IValues from '@/interfaces/values.interface';
+import IValues from '@/interfaces/response.interface';
 const responseStore = namespace('responses');
 @Mixin
 export default class ValidationMixin extends Vue {

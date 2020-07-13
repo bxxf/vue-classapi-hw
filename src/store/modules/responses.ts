@@ -9,12 +9,28 @@ export default class ResponsesModule extends VuexModule {
   }
 
   @Mutation
+  setResponses(responses: IValues[]) {
+    if (!responses) return;
+    this.responses = responses;
+  }
+
+  @Mutation
   addResponse(values: IValues): void {
     this.responses.push(values);
   }
 
   @Action({ rawError: true, commit: 'addResponse' })
   saveResponse(response: IValues) {
+    const responses: IValues[] = this.responses.concat(response);
+    localStorage.setItem('responses', JSON.stringify(responses));
     return response;
+  }
+
+  @Action({ rawError: true, commit: 'setReponses' })
+  fetchResponses() {
+    const responses: IValues[] = localStorage.getItem('responses')?.length
+      ? JSON.parse(localStorage.getItem('responses')!)
+      : null;
+    return responses;
   }
 }
