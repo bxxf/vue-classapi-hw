@@ -5,27 +5,27 @@ Vue.use(Vuex);
 import IValues from '@/interfaces/response.interface';
 
 export const createVuexMock = () => {
-  const mockState = { responses: [] as IValues[] };
-  const mockActions: any = {
-    saveResponse: (values: IValues) => mockState.responses.push(values),
+  const state = { responses: [] as IValues[] };
+  const actions: any = {
+    saveResponse: (values: IValues) => state.responses.push(values),
   };
 
   const store = new Vuex.Store({
     modules: {
       responses: {
         getters: {
-          data: () => mockState.responses,
+          data: () => state.responses,
         },
         namespaced: true,
-        state: mockState,
-        actions: mockActions,
+        state,
+        actions,
       },
     },
   });
 
   return {
-    state: mockState,
-    actions: mockActions,
+    state,
+    actions,
     store,
   };
 };

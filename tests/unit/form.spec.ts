@@ -3,9 +3,13 @@ import MainForm from '@/components/main-form.vue';
 import Vuetify from 'vuetify';
 
 import { response } from './utils/response';
+import Response from '@/interfaces/response.interface';
 
 const localVue = createLocalVue();
-type VMForm = Vue & { validateCode: (code: string) => boolean } & {
+
+type VMForm = Vue & {
+  validateCode: (code: string, responses: Response[]) => boolean;
+} & {
   submit: () => void;
 };
 
@@ -21,10 +25,9 @@ describe('main-form.vue', () => {
       vuetify,
     });
 
-    (wrapper.vm as VMForm).validateCode = (code: string) =>
-      ![response].some((res) => res.code === code);
-
-    expect((wrapper.vm as VMForm).validateCode(response.code)).toBeFalsy();
+    expect(
+      (wrapper.vm as VMForm).validateCode(response.code, [response]),
+    ).toBeFalsy();
   });
 
   it('form is submitted when valid', () => {

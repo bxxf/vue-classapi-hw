@@ -24,8 +24,8 @@ export default class ValidationMixin extends Vue {
     code: undefined as string | undefined,
   };
 
-  validateCode(code: string): boolean {
-    const exists = this.data.some((response) => response.code === code);
+  validateCode(code: string, responses: IValues[] = this.data): boolean {
+    const exists = responses.some((response) => response.code === code);
     if (exists) this.errors.code = 'This code is already used';
     return !exists;
   }
