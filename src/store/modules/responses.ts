@@ -29,9 +29,8 @@ export default class ResponsesModule extends VuexModule {
   @Action({ rawError: true, commit: 'setResponses' })
   fetchResponses(): Response[] | null {
     if (this.responses.length) return null;
-    const responses: Response[] = localStorage.getItem('responses')?.length
+    return localStorage.getItem('responses')
       ? JSON.parse(localStorage.getItem('responses')!)
       : null;
-    return responses;
   }
 }
